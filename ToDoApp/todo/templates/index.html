@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body style="background-color:#f0e68c;">
+{% load static %}
+  <div class="" style="background-color:#ffd700; padding:10px;border-bottom:solid black 3px">
+      <center><h1>TODO</h1></center>
+</div>
+
+<div class="container col-lg-4" style="margin-top:10px;margin-bottom:10px;padding:10px; border:solid black 2px">
+    <h3><center>ToDoForEveryOne</center></h3>
+    <p style="font-size:20px">We have a lot of choices to help us keep track of daily obligations.
+        A simple list on paper of things “To Do” is enough for you.
+    Create Account and add your Tasks. </p>
+</div>
+
+  <center><img src="{% static 'login.png' %}" class="img-fluid" alt="Hospital" style="margin-bottom:10px", height="400px" width="720px"></center>
+
+<div class="container col-lg-4">
+    <center><h3><b>Login</b></h3></center>
+    <form method="POST" action = "{%url 'login'%}" >
+        {% csrf_token %}
+  <div class="form-group" style="font-size:20px">
+    <label for="formGroupExampleInput"style="padding:10px">Enter Username</label>
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter Username" name="username" required="required">
+  </div>
+  <div class="form-group" style="font-size:20px">
+    <label for="exampleInputPassword1"style="padding:10px">Enter Password</label>
+    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter Password" name="password" required="required">
+  </div>
+        {% if flag == 0 %}
+
+        <div class="" style="color:red;padding:10px;font-size:20px"><label>Incorrect Details.</label></div>
+        {%endif%}
+         <div style="padding:10px;">
+          <center><button type="submit" class="btn btn-primary">Login</button></center>
+           </div>
+        <center style="font-size:20px;padding:10px">New User : <a href="#signup" style="text-decoration:none">Create Account</a></center>
+</form>
+</div>
+
+
+  <center><img src="{% static 'signup.jpg' %}" class="img-fluid" alt="Hospital" style="margin-bottom:10px", height="400px" width="720px"></center>
+
+    <div class="container col-lg-4" id="signup">
+    <center><h3><b>Signup</b></h3></center>
+    <form method="POST" action = "{% url 'signup' %}" >
+        {% csrf_token %}
+  <div class="form-group" style="font-size:20px">
+    <label for="formGroupExampleInput"style="padding:10px">Enter Username</label>
+    <input type="text" class="form-control" placeholder="Enter Username" name="username1" value="{{username}}" required="required">
+        {% if flag == 1 %}
+
+        <div class="" style="color:red;padding:10px"><label>Username Already Taken</label></div>
+        {%endif%}
+  </div>
+      <div class="form-group" style="font-size:20px">
+    <label style="padding:10px">Enter Email</label>
+    <input type="email" class="form-control" placeholder="Enter Email" name="email" value="{{email}}" required="required">
+        {% if flag == 2 %}
+
+        <div class="" style="color:red;padding:10px"><label>Email ID already exist with another account.</label></div>
+        {%endif%}
+  </div>
+  <div class="form-group" style="font-size:20px">
+    <label for="exampleInputPassword1"style="padding:10px">Enter Password</label>
+    <input type="password" class="form-control" placeholder="Enter Password" name="password1" value="{{password}}">
+  </div>
+
+         <div style="padding:10px;">
+          <center><button type="submit" class="btn btn-primary">SignUp</button></center>
+           </div>
+</form>
+</div>
+
+<div class="card text-center" style="border-bottom:solid black 3px;border-top:solid black 3px;background-color:#f0e68c;">
+  <div class="card-body">
+    <h5 class="card-title">Check out Developers Community Page</h5>
+    <p class="card-text"></p>
+    <a href="https://devtechcommune.herokuapp.com/" class="btn btn-success">Visit Us</a>
+  </div>
+  <div class="card-footer" style="background-color: #ffd700;border-top:solid black 3px;font-size:20px; color:black">
+      <center>Developed By : @ Pratik Moharkar</center>
+  </div>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- Popper.js first, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  </body>
+</html>

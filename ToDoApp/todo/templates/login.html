@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body style="background-color:#f0e68c;">
+{% load static %}
+  <div class="" style="background-color:#ffd700; padding:10px;border-bottom:solid black 3px">
+      <center><h1>TODO</h1></center>
+</div>
+
+<div class="row">
+  <div class="col-3">
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical" style="padding:10px">
+        <h2 style="padding:10px">Welcome {{user.username}}</h2><hr>
+
+      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Add Task</a>
+        <a href="{% url 'logout' %}"><center><button class="btn btn-danger" style="margin-top:20px">Logout</button></center></a>
+
+    </div>
+  </div>
+  <div class="col-9">
+    <div class="tab-content container" id="v-pills-tabContent">
+      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab"style="padding:10px">
+        <h3 style="font-size:20px"><b>Your Tasks</b></h3>
+          <div style="color:red;padding-top:10px;font-size:20px">{{empty}}</div>
+        {% for task in tasks %}
+        <form class="row g-3" action="{% url 'delete' task.task_id %}" method="post" style="background:#7cfc00;padding:5px;font-size:15px;margin:10px">
+            <div class="col-2 col-auto">
+                <label>{{task.task_id}}.</label>
+            </div>
+          <div class="col-5 col-auto">
+            <label>{{task.task}}</label>
+          </div>
+          <div class="col-3 col-auto">
+            <label>{{task.deadline.date}}</label>
+          </div>
+          <div class="col-2 col-auto">
+            <button type="submit" class="btn btn-primary mb-3" >Delete</button>
+          </div>
+        </form>
+          {% endfor %}
+      </div>
+
+
+      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" style="padding:10px">
+              <form action="{% url 'add' %}" method="post">{% csrf_token %}
+
+              <div class="col-lg-6" style="margin:20px;">
+                  <h5><b><center>Enter Task Description</center></b></h5><hr>
+              <div class="">
+                <h5 style="padding:5px"><b>Task</b></h5>
+		    <input class="form-control" type="text" name="task" placeholder="Task" required="required" />
+              </div>
+              <div class="">
+                <h5 style="padding:5px"><b>Deadline</b></h5>
+           <input class="form-control" type="text" name="deadline" placeholder="Deadline (Enter Date in Format of YYYY-MM-DD)" required="required" />
+              <div class="" style="color:red;padding:10px;font-size:15px"><label>Please Enter Correct Date Format.</label></div>
+              </div>
+                  <center><button type="submit" class="btn btn-success" style="margin-top: 10px">Add Task</button></center>
+        </div>
+
+
+              </form>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+  <div class="card text-center" style="border-bottom:solid black 3px;border-top:solid black 3px;background-color:#f0e68c;">
+  <div class="card-body">
+    <h5 class="card-title">Check out Developers Community Page</h5>
+    <p class="card-text"></p>
+    <a href="https://devtechcommune.herokuapp.com/" class="btn btn-success">Visit Us</a>
+  </div>
+  <div class="card-footer" style="background-color: #ffd700;border-top:solid black 3px;font-size:20px; color:black">
+      <center>Developed By : @ Pratik Moharkar</center>
+  </div>
+</div>
+
+    <!-- Optional JavaScript -->
+    <!-- Popper.js first, then Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  </body>
+</html>
